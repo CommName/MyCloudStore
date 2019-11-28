@@ -25,28 +25,19 @@ namespace Client
 
             byte[] plainText;
 
-            CryptoLibrary.TigerHash algoritam = new CryptoLibrary.TigerHash();
-            
-            output =CryptoLibrary.TigerHash.TigerHashAlgo(input);
+            CryptoLibrary.CryptoAlgo algoritam = new CryptoLibrary.A52();
+
+            algoritam.setKey(Encoding.ASCII.GetBytes("ABCDEFGH123"));
+
+            algoritam.encrypth(input,out output);
+
+            algoritam.setKey(Encoding.ASCII.GetBytes("ABCDEFGH123"));
+            algoritam.decrypth(output, out plainText);
 
 
-
-            this.textBox2.Text = Encoding.ASCII.GetString(output);
+            this.textBox2.Text = Encoding.ASCII.GetString(plainText);
         }
 
-        bool[] FromByteToBoolArray(byte[] array)
-        {
-            bool[] ret = new bool[array.Length * 8];
-
-            for(int j = 0; j < array.Length; j++)
-            {
-                for(int i =0; i < 8; i++)
-                {
-                    ret[j * 8 + i] = (array[j] & (1 << i)) == 0 ? false : true;
-                }
-            }
-            return ret;
-
-        }
+        
     }
 }

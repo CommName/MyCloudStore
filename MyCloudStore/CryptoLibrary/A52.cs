@@ -7,7 +7,7 @@ using System.Collections;
 
 namespace CryptoLibrary
 {
-    public class A52
+    public class A52 : CryptoAlgo
     {
         protected bool[] R1 = new bool[19];
         protected bool[] R2 = new bool[22];
@@ -165,7 +165,31 @@ namespace CryptoLibrary
 
         }
 
+        public void setKey(byte[] key)
+        {
+            bool[] keystream = BitByteManipulation.FromByteToBoolArray(key);
 
+            bool[] k = new bool[64];
+            bool[] f = new bool[24];
+
+            for (int i = 0; i < 64; i++)
+                k[i] = keystream[i];
+
+            for (int i = 0; i < 24; i++)
+                f[i] = keystream[i + 64];
+
+            this.setKey(k, f);
+        }
+
+        public void encrypth(byte[] plainText, out byte[] encryptedText)
+        {
+            this.encrypt(plainText,out encryptedText);
+        }
+
+        public void decrypth(byte[] encryptedText, out byte[] decryptedText)
+        {
+            this.encrypt(encryptedText, out decryptedText);
+        }
     }
 
     
