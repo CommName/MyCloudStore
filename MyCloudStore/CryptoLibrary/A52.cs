@@ -7,7 +7,7 @@ using System.Collections;
 
 namespace CryptoLibrary
 {
-    class A52
+    public class A52
     {
         protected bool[] R1 = new bool[19];
         protected bool[] R2 = new bool[22];
@@ -54,7 +54,7 @@ namespace CryptoLibrary
             R4[0] = R4[16] ^ R4[11];
         }
 
-        void setKey(bool[] Kc,bool[] f)
+        public void setKey(bool[] Kc,bool[] f)
         {
             for (var i = 0; i < R1.Length; i++)
                 R1[i] = false;
@@ -136,7 +136,7 @@ namespace CryptoLibrary
             }
         }
 
-        void encrypt(byte[] plainText ,out byte[] cryptedText)
+        public void encrypt(byte[] plainText ,out byte[] cryptedText)
         {
             BitArray plain = new BitArray(plainText);
 
@@ -145,14 +145,18 @@ namespace CryptoLibrary
             //Generisanje keystream-a
 
             var brojRundi = plain.Length / 114;
-
-            for(var i = 0; i < brojRundi; i++)
+            var i = 0;
+            while (i * 114 < keys.Length) 
             {
                 this.generateKeyStream();
-                for(var j = 0; j < 114; j++)
+                for (var j = 0; j < 114; j++)
                 {
+                    if (i * 114 + j >= keys.Length)
+                        break;
+
                     keys.Set(i * 114 + j, this.keyStream[j]);
                 }
+                i++;
             }
 
             plain.Xor(keys);

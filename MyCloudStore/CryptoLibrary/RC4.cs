@@ -23,7 +23,7 @@ namespace CryptoLibrary
         {
             for(i = 0; i < 256; i++)
             {
-                S[i] = i;
+                S[i] = (byte)i;
             }
 
             j = 0;
