@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CryptoLibrary
 {
-    public class RC4
+    public class RC4 : CryptoAlgo
     {
         
         protected  byte[] S;
@@ -19,7 +19,7 @@ namespace CryptoLibrary
             j = 0;
         }
 
-        public void inistaliazeKey(byte[] key)
+        public void setKey(byte[] key)
         {
             for(i = 0; i < 256; i++)
             {
@@ -58,6 +58,17 @@ namespace CryptoLibrary
             byte pom = S[i];
             S[i] = S[j];
             S[j] = pom;
+        }
+
+
+        public void encrypth(byte[] plainText, out byte[] encryptedText)
+        {
+            this.cipher(plainText, out encryptedText);
+        }
+
+        public void decrypth(byte[] encryptedText, out byte[] decryptedText)
+        {
+            this.cipher(encryptedText, out decryptedText);
         }
     }
 }
