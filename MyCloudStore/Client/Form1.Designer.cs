@@ -31,6 +31,8 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.OFD = new System.Windows.Forms.OpenFileDialog();
+            this.SFD = new System.Windows.Forms.SaveFileDialog();
             this.SuspendLayout();
             // 
             // textBox1
@@ -57,6 +59,10 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // OFD
+            // 
+            this.OFD.FileName = "openFileDialog1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -77,6 +83,8 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.OpenFileDialog OFD;
+        private System.Windows.Forms.SaveFileDialog SFD;
     }
 }
 

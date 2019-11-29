@@ -44,6 +44,7 @@
     <Compile Include="A52.cs" />
     <Compile Include="BitByteManipulation.cs" />
     <Compile Include="CryptoAlgo.cs" />
+    <Compile Include="CTR.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RC4.cs" />
     <Compile Include="TigerHash.cs" />
