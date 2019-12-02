@@ -20,7 +20,17 @@ namespace Client
 
         public CryptoAlgo getCryptoAlgo()
         {
-            throw new NotImplementedException();
+            A52 ret = new A52();
+            if (this.manSet.Checked)
+            {
+                ret.setKey(BitByteManipulation.FromByteToBoolArray(Encoding.ASCII.GetBytes(this.KcTextBox.Text)), BitByteManipulation.FromByteToBoolArray(Encoding.ASCII.GetBytes(this.fTextBox.Text)));
+            }
+            else
+            {
+                ret.setKey(Encoding.ASCII.GetBytes(this.keyTextBox.Text));
+            }
+
+            return ret;
         }
     }
 }

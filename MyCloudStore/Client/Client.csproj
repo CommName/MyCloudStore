@@ -85,6 +85,12 @@
     <Compile Include="RC4Settings.Designer.cs">
       <DependentUpon>RC4Settings.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="A52Settings.resx">
+      <DependentUpon>A52Settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CTRSettings.resx">
+      <DependentUpon>CTRSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FileManagerDialog.resx">
       <DependentUpon>FileManagerDialog.cs</DependentUpon>
     </EmbeddedResource>
