@@ -7,14 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CryptoLibrary;
 
 namespace Client
 {
-    public partial class CTRSettings : UserControl
+    public partial class CTRSettings : UserControl, CryptoFactory
     {
         public CTRSettings()
         {
             InitializeComponent();
+        }
+
+        public CryptoAlgo getCryptoAlgo()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -21,6 +21,10 @@ namespace CryptoLibrary
 
         public void setKey(byte[] key)
         {
+            if (key.Length <= 0)
+            {
+                throw new CryptoAlgoErrors(ERROR.NotCompatibleKey);
+            }
             for(i = 0; i < 256; i++)
             {
                 S[i] = (byte)i;

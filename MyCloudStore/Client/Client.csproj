@@ -52,6 +52,7 @@
     <Compile Include="A52Settings.Designer.cs">
       <DependentUpon>A52Settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="CryptoFactory.cs" />
     <Compile Include="CTRSettings.cs">
       <SubType>UserControl</SubType>
     </Compile>

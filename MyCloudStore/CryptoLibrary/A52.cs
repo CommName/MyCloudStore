@@ -56,6 +56,11 @@ namespace CryptoLibrary
 
         public void setKey(bool[] Kc,bool[] f)
         {
+            if(Kc.Length<64 || f.Length< 24)
+            {
+                throw new CryptoAlgoErrors(ERROR.NotCompatibleKey);
+            }
+
             for (var i = 0; i < R1.Length; i++)
                 R1[i] = false;
 

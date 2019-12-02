@@ -40,7 +40,7 @@ namespace Client
         {
             this.Controls.Clear();
             var fmd = new FileManagerDialog();
-            this.Width = 300;
+            this.Width = 540;
             this.Height = 370;
             fmd.Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Right;
             this.Controls.Add(fmd);
