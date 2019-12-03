@@ -12,6 +12,9 @@ namespace CryptoLibrary
         void encrypth(byte[] plainText, out byte[] encryptedText);
         void decrypth(byte[] encryptedText, out byte[] decryptedText);
 
+        CryptoAlgo getCopy();
+
+
     }
 
     

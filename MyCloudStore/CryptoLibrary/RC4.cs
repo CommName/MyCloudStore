@@ -19,6 +19,17 @@ namespace CryptoLibrary
             j = 0;
         }
 
+        RC4(RC4 copy)
+        {
+            this.i = copy.i;
+            this.j = copy.j;
+            this.S = new byte[copy.S.Length];
+            for(var i = 0; i< S.Length; i++)
+            {
+                S[i] = copy.S[i];
+            }
+        }
+
         public void setKey(byte[] key)
         {
             if (key.Length <= 0)
@@ -73,6 +84,11 @@ namespace CryptoLibrary
         public void decrypth(byte[] encryptedText, out byte[] decryptedText)
         {
             this.cipher(encryptedText, out decryptedText);
+        }
+
+        public CryptoAlgo getCopy()
+        {
+            return new RC4(this);
         }
     }
 }

@@ -16,6 +16,46 @@ namespace CryptoLibrary
 
         protected bool[] keyStream = new bool[228];
 
+
+        public CryptoAlgo getCopy()
+        {
+            CryptoAlgo ret = new A52(this);
+            return ret;
+        }
+
+        public A52(A52 copy) : this()
+        {
+            for(var i =0; i<19; i++)
+            {
+                this.R1[i] = copy.R1[i];
+            }
+            for(var i =0; i<22; i++)
+            {
+                this.R2[i] = copy.R2[i];
+            }
+            for(var i = 0; i<23; i++)
+            {
+                this.R3[i] = copy.R3[i];
+            }
+            for(var i =0; i < 17; i++)
+            {
+                this.R4[i] = copy.R4[i];
+            }
+            for(var i =0; i < 228; i++)
+            {
+                this.keyStream[i] = copy.keyStream[i];
+            }
+        }
+
+        public A52()
+        {
+            this.R1 = new bool[19];
+            this.R2 = new bool[22];
+            this.R3 = new bool[23];
+            this.R4 = new bool[17];
+            this.keyStream = new bool[228];
+        }
+
         void ShiftRightRegisterR1()
         {
             bool last = R1[R1.Length - 1];
@@ -195,6 +235,7 @@ namespace CryptoLibrary
         {
             this.encrypt(encryptedText, out decryptedText);
         }
+
     }
 
     

@@ -8,17 +8,27 @@ namespace CryptoLibrary
 {
     public class CTR : CryptoAlgo
     {
-        protected byte[] key;
         protected UInt64 counter;
         protected byte[] Nonce;
+        protected CryptoAlgo original;
         protected CryptoAlgo blockCipherEncryption;
 
 
-        public CTR(byte[] IV, CryptoAlgo bce, byte[] key)
+        public CTR(byte[] IV, CryptoAlgo bce)
         {
+            if (IV.Length != 8)
+            {
+                throw new CryptoAlgoErrors(ERROR.NotCompatibleKey);
+            }
             this.Nonce = IV;
-            this.blockCipherEncryption = bce;
-            this.key = key;
+            this.original = bce;
+        }
+
+        public CTR(CTR copy)
+        {
+            this.counter = copy.counter;
+            this.Nonce = copy.Nonce;
+            this.original = copy.original;
         }
 
         protected void encrypthBlock(byte[] input, out byte[] output)
@@ -27,7 +37,7 @@ namespace CryptoLibrary
             byte[] IV = new byte[16];
             Nonce.CopyTo(IV, 0);
             BitConverter.GetBytes(counter).CopyTo(IV, 8);
-            blockCipherEncryption.setKey(key);
+            this.blockCipherEncryption = original.getCopy();
 
             byte[] encKey;
             blockCipherEncryption.encrypth(IV, out encKey);
@@ -89,7 +99,16 @@ namespace CryptoLibrary
 
         public void setKey(byte[] key)
         {
-            this.key = key;
+            if(key.Length != 8)
+            {
+                throw new CryptoAlgoErrors(ERROR.NotCompatibleKey);
+            }
+            this.Nonce = key;
+        }
+
+        public CryptoAlgo getCopy()
+        {
+            return new CTR(this);
         }
     }
 }

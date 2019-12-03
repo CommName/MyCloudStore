@@ -52,7 +52,20 @@ namespace Client
         public CryptoAlgo getCryptoAlgo()
         {
             CryptoAlgo ckb = this.cryptoFactory.getCryptoAlgo();
-            throw new NotImplementedException();
+            byte[] IV = Encoding.ASCII.GetBytes(IVtextBox.Text);
+            return new CTR(IV, ckb);
+        }
+
+        private void ckpComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(ckpComboBox.SelectedIndex == 0)
+            {
+                setForRC4();
+            }
+            else if (ckpComboBox.SelectedIndex == 1)
+            {
+                setForA52();
+            }
         }
     }
 }

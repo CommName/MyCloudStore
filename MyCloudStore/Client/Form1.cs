@@ -62,7 +62,7 @@ namespace Client
 
             algoritam.setKey(Encoding.ASCII.GetBytes("ABCDEFGH123"));
 
-            CryptoLibrary.CryptoAlgo block = new CryptoLibrary.CTR(Encoding.ASCII.GetBytes("ABCDEFGH"), algoritam, Encoding.ASCII.GetBytes("ABCDEFGH123"));
+            CryptoLibrary.CryptoAlgo block = new CryptoLibrary.CTR(Encoding.ASCII.GetBytes("ABCDEFGH"), algoritam);
 
             block.encrypth(input, out output);
             this.SFD.ShowDialog();
