@@ -28,6 +28,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoLibrary", "CryptoLibrary\CryptoLibrary.csproj", "{D5AAEFF8-986A-404C-AD1C-E9F22C334A1C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{E2F11BD4-DA67-4F89-B5CC-1942A455C3E5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{037B4BC4-0F6F-4EE8-95AA-29DF8CA2F5A2} = {037B4BC4-0F6F-4EE8-95AA-29DF8CA2F5A2}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

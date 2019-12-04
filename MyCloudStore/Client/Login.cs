@@ -17,6 +17,19 @@ namespace Client
 
         public passwordHash PasswordHash;
 
+        public string Username
+        {
+            get { return this.username_text_box.Text; }
+            set { this.username_text_box.Text = value; }
+        }
+
+        public string Password
+        {
+            get { return this.password_text_box.Text; }
+            set { this.password_text_box.Text = value; }
+        }
+
+
         public Login()
         {
             InitializeComponent();

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CloudService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:54023/CloudService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:54023/CloudService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:54023/CloudService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ICloudService_getYourFileNames_InputMessage">
+    <wsdl:part name="parameters" element="tns:getYourFileNames" />
+  </wsdl:message>
+  <wsdl:message name="ICloudService_getYourFileNames_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getYourFileNamesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICloudService_getChunkSize_InputMessage">
+    <wsdl:part name="parameters" element="tns:getChunkSize" />
+  </wsdl:message>
+  <wsdl:message name="ICloudService_getChunkSize_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getChunkSizeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICloudService_createNewFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:createNewFile" />
+  </wsdl:message>
+  <wsdl:message name="ICloudService_createNewFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:createNewFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICloudService_uploadData_InputMessage">
+    <wsdl:part name="parameters" element="tns:uploadData" />
+  </wsdl:message>
+  <wsdl:message name="ICloudService_uploadData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:uploadDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICloudService_downloadFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:downloadFile" />
+  </wsdl:message>
+  <wsdl:message name="ICloudService_downloadFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:downloadFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICloudService_createNewUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:createNewUser" />
+  </wsdl:message>
+  <wsdl:message name="ICloudService_createNewUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:createNewUserResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ICloudService">
+    <wsdl:operation name="getYourFileNames">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICloudService/getYourFileNames" message="tns:ICloudService_getYourFileNames_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICloudService/getYourFileNamesResponse" message="tns:ICloudService_getYourFileNames_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getChunkSize">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICloudService/getChunkSize" message="tns:ICloudService_getChunkSize_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICloudService/getChunkSizeResponse" message="tns:ICloudService_getChunkSize_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="createNewFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICloudService/createNewFile" message="tns:ICloudService_createNewFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICloudService/createNewFileResponse" message="tns:ICloudService_createNewFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="uploadData">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICloudService/uploadData" message="tns:ICloudService_uploadData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICloudService/uploadDataResponse" message="tns:ICloudService_uploadData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="downloadFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICloudService/downloadFile" message="tns:ICloudService_downloadFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICloudService/downloadFileResponse" message="tns:ICloudService_downloadFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="createNewUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICloudService/createNewUser" message="tns:ICloudService_createNewUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICloudService/createNewUserResponse" message="tns:ICloudService_createNewUser_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ICloudService" type="tns:ICloudService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getYourFileNames">
+      <soap:operation soapAction="http://tempuri.org/ICloudService/getYourFileNames" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getChunkSize">
+      <soap:operation soapAction="http://tempuri.org/ICloudService/getChunkSize" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createNewFile">
+      <soap:operation soapAction="http://tempuri.org/ICloudService/createNewFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="uploadData">
+      <soap:operation soapAction="http://tempuri.org/ICloudService/uploadData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="downloadFile">
+      <soap:operation soapAction="http://tempuri.org/ICloudService/downloadFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createNewUser">
+      <soap:operation soapAction="http://tempuri.org/ICloudService/createNewUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CloudService">
+    <wsdl:port name="BasicHttpBinding_ICloudService" binding="tns:BasicHttpBinding_ICloudService">
+      <soap:address location="http://localhost:54023/CloudService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

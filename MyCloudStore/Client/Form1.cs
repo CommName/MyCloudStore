@@ -8,13 +8,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using Client.ServiceReference1;
+
 namespace Client
 {
     public partial class Form1 : Form
     {
+
+        Login login;
+        CloudServiceClient proxy;
         public Form1()
         {
-            this.loginEvent += new loginDelegate(loginFun);
+            proxy = new CloudServiceClient();
+            this.loginEvent += new loginDelegate(dbTest);
             InitializeComponent();
             this.setLoginView();
         }
@@ -27,13 +33,20 @@ namespace Client
         {
             this.Controls.Clear();
 
-            var login = new Login();
+            login = new Login();
             this.Width = 240;
             this.Height = 180;
             login.Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top  | AnchorStyles.Right;
             login.login = this.loginEvent;
             this.Controls.Add(login);
 
+        }
+
+        private void  dbTest(string username, string password)
+        {
+            var povratna = proxy.getYourFileNames(username, password);
+
+            login.Username = povratna.First();
         }
 
         private void loginFun(string username, string password)
