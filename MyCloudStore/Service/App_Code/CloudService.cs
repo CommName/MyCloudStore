@@ -13,43 +13,29 @@ public class CloudService : ICloudService
         throw new NotImplementedException();
     }
 
-    public void discardFile(string username, string password)
+    public void deleteFile(string username, string password, string fileName)
     {
         throw new NotImplementedException();
     }
 
-    public void discardSavedFile(string username, string password, string fileName)
+    public bool downloadFile(string username, string password, string fileName, out byte[] data, uint offset)
     {
         throw new NotImplementedException();
     }
-
-    public void downloadFile(string username, string password, string fileName)
-    {
-        throw new NotImplementedException();
-    }
-
 
     public uint getChunkSize()
     {
         throw new NotImplementedException();
     }
 
-    public byte[] getData(string username, string password, out bool done, int size)
-    {
-        throw new NotImplementedException();
-    }
-
     public List<string> getYourFileNames(string username, string password)
     {
-        throw new NotImplementedException();
+        List<string> ret = new List<string>();
+        ret.Add("asdlkfa");
+        return ret;
     }
 
-    public void saveFile(string username, string password)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void uploadData(string username, string password, byte[] data, int size)
+    public void uploadData(string username, string password, string fileName, byte[] data, int size)
     {
         throw new NotImplementedException();
     }

@@ -15,26 +15,17 @@ public interface ICloudService
     [OperationContract]
     uint getChunkSize();
 
-    //Upload file functions
     [OperationContract]
     void createNewFile(string username, string password, string fileName, string fileHash);
 
     [OperationContract]
-    void uploadData(string username, string password, byte[] data, int size);
+    void deleteFile(string username, string password, string fileName);
 
     [OperationContract]
-    void saveFile(string username, string password);
+    void uploadData(string username, string password, string fileName, byte[] data, int size);
 
     [OperationContract]
-    void discardFile(string username, string password);
+    bool downloadFile(string username, string password, string fileName, out byte[] data, uint offset);
 
-    void discardSavedFile(string username, string password, string fileName);
-
-    //Download file functions
-    [OperationContract]
-    void downloadFile(string username, string password, string fileName);
-
-    [OperationContract]
-    byte[] getData(string username, string password, out bool done, int size);
 
 }
