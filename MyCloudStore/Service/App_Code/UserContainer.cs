@@ -9,6 +9,7 @@ using System.Web;
 public class UserContainer
 {
 
+
     protected static object locker = false;
     protected static UserContainer instance = null;
     public static UserContainer Instance
@@ -27,7 +28,17 @@ public class UserContainer
     }
     protected UserContainer()
     {
-        
+    }
 
+    public void registerUser(string username, string password)
+    {
+        using (var db = new UserDBContext())
+        {
+            User newUser = new User();
+            newUser.Username = username;
+            newUser.Password = password;
+            db.Users.Add(newUser);
+            db.SaveChanges();
+        }
     }
 }

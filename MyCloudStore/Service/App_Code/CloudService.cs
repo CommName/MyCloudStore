@@ -8,6 +8,7 @@ using System.Text;
 // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "CloudService" in code, svc and config file together.
 public class CloudService : ICloudService
 {
+    public static uint chunkSize = 2; //U mb
     public void createNewFile(string username, string password, string fileName, string fileHash)
     {
         throw new NotImplementedException();
@@ -25,7 +26,7 @@ public class CloudService : ICloudService
 
     public uint getChunkSize()
     {
-        throw new NotImplementedException();
+        return chunkSize;
     }
 
     public List<string> getYourFileNames(string username, string password)
@@ -41,6 +42,11 @@ public class CloudService : ICloudService
         db.SaveChanges();
         ret.Add(db.Users.ToList().First().Password);
         return ret;
+    }
+
+    public void RegisterUser(string username, string password)
+    {
+        UserContainer.Instance.registerUser(username, password);
     }
 
     public void uploadData(string username, string password, string fileName, byte[] data, int size)

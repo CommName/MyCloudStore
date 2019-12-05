@@ -27,5 +27,6 @@ public interface ICloudService
     [OperationContract]
     bool downloadFile(string username, string password, string fileName, out byte[] data, uint offset);
 
+    void RegisterUser(string username, string password);
 
 }
