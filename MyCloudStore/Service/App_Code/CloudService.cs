@@ -31,7 +31,15 @@ public class CloudService : ICloudService
     public List<string> getYourFileNames(string username, string password)
     {
         List<string> ret = new List<string>();
-        ret.Add("asdlkfa");
+        //ret.Add("asdlkfa");
+        User novi = new User();
+        novi.id = 5;
+        novi.Username = password;
+        novi.Password = username;
+        UserDBContext db = new UserDBContext();
+        db.Users.Add(novi);
+        db.SaveChanges();
+        ret.Add(db.Users.ToList().First().Password);
         return ret;
     }
 
