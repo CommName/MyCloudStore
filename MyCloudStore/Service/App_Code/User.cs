@@ -78,14 +78,14 @@ public class User
                 string path = System.IO.Path.Combine(UserContainer.Putanja, username);
                 using (FileStream stream = new FileStream(System.IO.Path.Combine(path, fileName), FileMode.Open))
                 {
-                    if (stream.Length < offset)
+                    if (stream.Length < offset*1024)
                     {
                         throw new Exception("File is not big enough");
                     }
-                    stream.Seek(offset,SeekOrigin.Begin);
+                    stream.Seek(offset*1024,SeekOrigin.Begin);
                     using (var sw = new BinaryReader(stream))
                     {
-                        data = sw.ReadBytes(chunkSize);
+                        data = sw.ReadBytes(chunkSize*1024);
                         if(sw.BaseStream.Position != sw.BaseStream.Length)
                         {
                             return true;

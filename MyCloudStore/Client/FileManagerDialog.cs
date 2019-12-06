@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using Client.ServiceReference1;
+using System.Threading;
 
 namespace Client
 {
@@ -124,14 +125,22 @@ namespace Client
 
         }
 
+        private void downloadFile()
+        {
+           
+        }
+
         private void download_button_Click(object sender, EventArgs e)
         {
-            try
+            if (this.SFD.ShowDialog() == DialogResult.OK)
             {
-                CryptoLibrary.CryptoAlgo block = this.cryptoFactory.getCryptoAlgo();
-
-                if (this.SFD.ShowDialog() == DialogResult.OK)
+                string saveFile = this.SFD.FileName;
+                string file = this.file_list.SelectedItem.ToString();
+                Thread downloadFileThread = new Thread(() =>
+            {
+                try
                 {
+                    CryptoLibrary.CryptoAlgo block = this.cryptoFactory.getCryptoAlgo();
                     byte[] input = new byte[0];
                     //Skidanje sa servera
                     bool done = false;
@@ -139,7 +148,7 @@ namespace Client
                     uint chunksize = proxy.getChunkSize();
                     while (!done)
                     {
-                        downloadFileRequest downloadFileRequest = new downloadFileRequest(username, password, this.file_list.SelectedItem.ToString(), offset);
+                        downloadFileRequest downloadFileRequest = new downloadFileRequest(username, password, file, offset);
                         downloadFileResponse downloadFileResponse = new downloadFileResponse();
                         downloadFileResponse = proxy.downloadFile(downloadFileRequest);
                         offset += chunksize;
@@ -153,21 +162,24 @@ namespace Client
                     byte[] output;
                     block.encrypth(input, out output);
 
-                    using (FileStream stream = new FileStream(this.SFD.FileName, FileMode.Create))
+                    using (FileStream stream = new FileStream(saveFile, FileMode.Create))
                     {
                         using (BinaryWriter sw = new BinaryWriter(stream))
                         {
                             sw.Write(output);
                         }
                     }
+
                 }
-            }
-            catch (CryptoLibrary.CryptoAlgoErrors err)
-            {
-                if (err.code == CryptoLibrary.ERROR.NotCompatibleKey)
+                catch (CryptoLibrary.CryptoAlgoErrors err)
                 {
-                    MessageBox.Show("Key is to short");
+                    if (err.code == CryptoLibrary.ERROR.NotCompatibleKey)
+                    {
+                        MessageBox.Show("Key is to short");
+                    }
                 }
+            });
+                downloadFileThread.Start();
             }
         }
 
