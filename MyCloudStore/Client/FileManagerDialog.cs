@@ -34,10 +34,21 @@ namespace Client
             this.username = username;
             this.password = password;
             this.file_list.Items.Clear();
-            foreach(string file in fileNames)
+            this.updateFileList(fileNames);
+        }
+
+        private void updateFileList(List<String> fileNames)
+        {
+            this.file_list.Items.Clear();
+            foreach (string file in fileNames)
             {
                 this.file_list.Items.Add(file);
             }
+        }
+
+        private void updateFileList()
+        {
+            this.updateFileList(proxy.getYourFileNames(username, password));
         }
 
         private enum AlgorithmIndex { 
@@ -100,6 +111,7 @@ namespace Client
                         }
                         this.proxy.uploadData(username, password, this.OFD.SafeFileName, send, 0);
                     }
+                    this.updateFileList();
                 }
             }
             catch (CryptoLibrary.CryptoAlgoErrors err)
@@ -118,17 +130,35 @@ namespace Client
             {
                 CryptoLibrary.CryptoAlgo block = this.cryptoFactory.getCryptoAlgo();
 
-                this.OFD.ShowDialog();
-                byte[] input = File.ReadAllBytes(this.OFD.FileName);
-                byte[] output;
-                block.encrypth(input, out output);
-
-                this.SFD.ShowDialog();
-                using (FileStream stream = new FileStream(this.SFD.FileName, FileMode.Create))
+                if (this.SFD.ShowDialog() == DialogResult.OK)
                 {
-                    using (BinaryWriter sw = new BinaryWriter(stream))
+                    byte[] input = new byte[0];
+                    //Skidanje sa servera
+                    bool done = false;
+                    uint offset = 0;
+                    uint chunksize = proxy.getChunkSize();
+                    while (!done)
                     {
-                        sw.Write(output);
+                        downloadFileRequest downloadFileRequest = new downloadFileRequest(username, password, this.file_list.SelectedItem.ToString(), offset);
+                        downloadFileResponse downloadFileResponse = new downloadFileResponse();
+                        downloadFileResponse = proxy.downloadFile(downloadFileRequest);
+                        offset += chunksize;
+                        byte[] newInput = new byte[input.Length + downloadFileResponse.data.Length];
+                        System.Buffer.BlockCopy(input, 0, newInput, 0, input.Length);
+                        System.Buffer.BlockCopy(downloadFileResponse.data, 0, newInput, input.Length, downloadFileResponse.data.Length);
+                        input = newInput;
+
+                    }
+
+                    byte[] output;
+                    block.encrypth(input, out output);
+
+                    using (FileStream stream = new FileStream(this.SFD.FileName, FileMode.Create))
+                    {
+                        using (BinaryWriter sw = new BinaryWriter(stream))
+                        {
+                            sw.Write(output);
+                        }
                     }
                 }
             }
@@ -155,6 +185,13 @@ namespace Client
             {
                 setForCTR();
             }
+        }
+
+        private void delete_button_Click(object sender, EventArgs e)
+        {
+            string filename = this.file_list.SelectedItem.ToString();
+            this.proxy.deleteFile(username, password, filename);
+            this.updateFileList();
         }
     }
 }

@@ -63,4 +63,14 @@ public class UserContainer
             db.SaveChanges();
         }
     }
+    public void deleteFile(string username, string password, string fileName)
+    {
+        using (var db = new UserDBContext())
+        {
+            User ret = db.Users.Where(b => b.Username == username).Include(b => b.Files).FirstOrDefault();
+            UserFiles deletedfile = ret.deleteFile(username, password, fileName);
+            db.UserFiles.Remove(deletedfile);
+            db.SaveChanges();
+        }
+    }
 }

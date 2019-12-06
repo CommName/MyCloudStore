@@ -16,7 +16,7 @@ public class CloudService : ICloudService
 
     public void deleteFile(string username, string password, string fileName)
     {
-        throw new NotImplementedException();
+        UserContainer.Instance.deleteFile(username, password, fileName);
     }
 
     public bool downloadFile(string username, string password, string fileName, out byte[] data, uint offset)

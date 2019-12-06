@@ -41,13 +41,27 @@ public class User
 
     }
 
-    public void deleteFile(string username, string password, string fileName)
+    public UserFiles deleteFile(string username, string password, string fileName)
     {
         if (username != this.Username || this.Password != password)
         {
             throw new Exception("Wrong username or password!");
         }
         //Provera da li fajl postoji
+
+        foreach (UserFiles file in Files)
+        {
+            if (file.fileName == fileName)
+            {
+                string path = System.IO.Path.Combine(UserContainer.Putanja, username);
+                //brisanje fjala
+                File.Delete(System.IO.Path.Combine(path, fileName));
+
+                return file;
+            }
+        }
+
+        throw new Exception("File not found!");
     }
 
     public bool getFileBytes(string username, string password, string fileName, out byte[] data, uint offset, int chunkSize)
@@ -61,7 +75,8 @@ public class User
         {
             if(file.fileName == fileName)
             {
-                using (FileStream stream = new FileStream(UserContainer.Putanja+this.Username+"\\"+fileName,FileMode.Open))
+                string path = System.IO.Path.Combine(UserContainer.Putanja, username);
+                using (FileStream stream = new FileStream(System.IO.Path.Combine(path, fileName), FileMode.Open))
                 {
                     if (stream.Length < offset)
                     {
