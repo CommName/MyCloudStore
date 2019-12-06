@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using Client.ServiceReference1;
+using System.ServiceModel;
 
 namespace Client
 {
@@ -20,7 +21,7 @@ namespace Client
         public Form1()
         {
             proxy = new CloudServiceClient();
-            this.loginEvent += new loginDelegate(dbTest);
+            this.loginEvent += new loginDelegate(loginFun);
             InitializeComponent();
             this.setLoginView();
         }
@@ -51,12 +52,22 @@ namespace Client
 
         private void loginFun(string username, string password)
         {
-            this.Controls.Clear();
-            var fmd = new FileManagerDialog();
-            this.Width = 540;
-            this.Height = 370;
-            fmd.Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Right;
-            this.Controls.Add(fmd);
+            try
+            {
+                List<string> fileNames = proxy.getYourFileNames(username, password);
+                this.Controls.Clear();
+                var fmd = new FileManagerDialog();
+                this.Width = 540;
+                this.Height = 370;
+                fmd.Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Right;
+                this.Controls.Add(fmd);
+            }
+            catch(FaultException<ErrorMessages> e)
+            {
+                MessageBox.Show(e.Detail.Message);
+                proxy.RegisterUser(username, password);
+                this.loginFun(username, password);
+            }
         }
 
 

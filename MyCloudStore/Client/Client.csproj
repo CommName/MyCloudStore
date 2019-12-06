@@ -119,6 +119,9 @@
     <EmbeddedResource Include="RC4Settings.resx">
       <DependentUpon>RC4Settings.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Connected Services\ServiceReference1\Client.ServiceReference1.downloadFileResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ServiceReference1\CloudService.wsdl" />
     <None Include="Connected Services\ServiceReference1\CloudService.xsd">
       <SubType>Designer</SubType>
@@ -127,6 +130,12 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServiceReference1\CloudService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReference1\CloudService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReference1\CloudService31.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\Settings.settings">

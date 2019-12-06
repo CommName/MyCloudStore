@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+using System.ComponentModel.DataAnnotations.Schema;
 /// <summary>
 /// Summary description for UserFiles
 /// </summary>
 public class UserFiles
 {
-    public int ID { get; set; }
+    public int Id { get; set; }
     public string fileName { get; set; }
     public string hash { get; set; }
+
+    public int UserID { get; set; }
+    [ForeignKey("UserID")]
+    public User User { get; set; }
 
 }

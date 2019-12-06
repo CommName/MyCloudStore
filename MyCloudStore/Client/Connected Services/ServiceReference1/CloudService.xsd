@@ -43,6 +43,20 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="deleteFile">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fileName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="deleteFileResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="uploadData">
     <xs:complexType>
       <xs:sequence>
@@ -50,6 +64,7 @@
         <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="fileName" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="data" nillable="true" type="xs:base64Binary" />
+        <xs:element minOccurs="0" name="size" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -64,18 +79,19 @@
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="fileName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="offSet" type="xs:int" />
+        <xs:element minOccurs="0" name="offset" type="xs:unsignedInt" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="downloadFileResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="done" type="xs:boolean" />
+        <xs:element minOccurs="0" name="downloadFileResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="data" nillable="true" type="xs:base64Binary" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="createNewUser">
+  <xs:element name="RegisterUser">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
@@ -83,7 +99,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="createNewUserResponse">
+  <xs:element name="RegisterUserResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

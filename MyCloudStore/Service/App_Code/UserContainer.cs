@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity;
 
 /// <summary>
 /// Summary description for UserContainer
@@ -9,7 +10,7 @@ using System.Web;
 public class UserContainer
 {
 
-
+    public static string Putanja = "C:\\MyCloudStorage\\";
     protected static object locker = false;
     protected static UserContainer instance = null;
     public static UserContainer Instance
@@ -28,6 +29,7 @@ public class UserContainer
     }
     protected UserContainer()
     {
+        Database.SetInitializer(new DropCreateDatabaseIfModelChanges<UserDBContext>());
     }
 
     public void registerUser(string username, string password)
@@ -38,6 +40,25 @@ public class UserContainer
             newUser.Username = username;
             newUser.Password = password;
             db.Users.Add(newUser);
+            db.SaveChanges();
+        }
+    }
+
+    public User getUser(string username)
+    {
+        using (var db = new UserDBContext())
+        {
+            User ret = db.Users.Where(b => b.Username == username).Include(b => b.Files).FirstOrDefault();
+            return ret;
+        }
+    }
+
+    public void createNewFile(string username, string password, string fileName, string fileHash)
+    {
+        using (var db = new UserDBContext())
+        {
+            User ret = db.Users.Where(b => b.Username == username).FirstOrDefault();
+            ret.CreateNewFile(username, password, fileName, fileHash);
             db.SaveChanges();
         }
     }

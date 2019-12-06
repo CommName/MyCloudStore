@@ -21,7 +21,7 @@ public class CloudService : ICloudService
 
     public bool downloadFile(string username, string password, string fileName, out byte[] data, uint offset)
     {
-        throw new NotImplementedException();
+        return UserContainer.Instance.getUser(username).getFileBytes(username, password, fileName, out data, offset*chunkSize,(int)chunkSize);
     }
 
     public uint getChunkSize()
@@ -31,17 +31,12 @@ public class CloudService : ICloudService
 
     public List<string> getYourFileNames(string username, string password)
     {
-        List<string> ret = new List<string>();
-        //ret.Add("asdlkfa");
-        User novi = new User();
-        novi.id = 5;
-        novi.Username = password;
-        novi.Password = username;
-        UserDBContext db = new UserDBContext();
-        db.Users.Add(novi);
-        db.SaveChanges();
-        ret.Add(db.Users.ToList().First().Password);
-        return ret;
+        User user = UserContainer.Instance.getUser(username);
+        if (user == null)
+        {
+            throw new FaultException<ErrorMessages>(new ErrorMessages("No users found"));
+        }
+        return user.getFileNames(username, password);
     }
 
     public void RegisterUser(string username, string password)
@@ -51,6 +46,6 @@ public class CloudService : ICloudService
 
     public void uploadData(string username, string password, string fileName, byte[] data, int size)
     {
-        throw new NotImplementedException();
+        UserContainer.Instance.getUser(username).appendData(username, password, fileName, data, size);
     }
 }

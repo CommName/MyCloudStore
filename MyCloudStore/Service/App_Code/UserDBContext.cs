@@ -10,4 +10,9 @@ public class UserDBContext : DbContext
 {
     public DbSet<User> Users { get; set; }
     public DbSet<UserFiles> UserFiles { get; set; }
+
+    public UserDBContext()
+    {
+        this.Configuration.LazyLoadingEnabled = true;
+    }
 }
