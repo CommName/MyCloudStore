@@ -10,7 +10,7 @@ using System.Data.Entity;
 public class UserContainer
 {
 
-    public static string Putanja = "C:\\MyCloudStorage\\";
+    public static string Putanja = @"C:\MyCloudStorage\";
     protected static object locker = false;
     protected static UserContainer instance = null;
     public static UserContainer Instance
@@ -42,6 +42,7 @@ public class UserContainer
             db.Users.Add(newUser);
             db.SaveChanges();
         }
+        System.IO.Directory.CreateDirectory(System.IO.Path.Combine(Putanja, username));
     }
 
     public User getUser(string username)
@@ -57,7 +58,7 @@ public class UserContainer
     {
         using (var db = new UserDBContext())
         {
-            User ret = db.Users.Where(b => b.Username == username).FirstOrDefault();
+            User ret = db.Users.Where(b => b.Username == username).Include(b => b.Files).FirstOrDefault();
             ret.CreateNewFile(username, password, fileName, fileHash);
             db.SaveChanges();
         }

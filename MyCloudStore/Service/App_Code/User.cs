@@ -32,7 +32,9 @@ public class User
         noviFajl.fileName = fileName;
         noviFajl.hash = fileHash;
         this.Files.Add(noviFajl);
-        using(FileStream stream = new FileStream(UserContainer.Putanja + this.Username + "\\" + fileName, FileMode.Create))
+        string path = System.IO.Path.Combine(UserContainer.Putanja, username);
+
+        using (FileStream stream = new FileStream(System.IO.Path.Combine(path,fileName), FileMode.Create))
         {
 
         }
@@ -96,7 +98,9 @@ public class User
         {
             if (file.fileName == fileName)
             {
-                using (FileStream stream = new FileStream(UserContainer.Putanja + this.Username + "\\" + fileName, FileMode.Append))
+                string path = System.IO.Path.Combine(UserContainer.Putanja, username);
+
+                using (FileStream stream = new FileStream(System.IO.Path.Combine(path, fileName), FileMode.Append))
                 {
                     
                     using (var sw = new BinaryWriter(stream))
@@ -104,6 +108,7 @@ public class User
                         sw.Write(data);
                     }
                 }
+                return;
             }
         }
 

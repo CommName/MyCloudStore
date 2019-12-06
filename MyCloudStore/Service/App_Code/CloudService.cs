@@ -11,7 +11,7 @@ public class CloudService : ICloudService
     public static uint chunkSize = 2; //U mb
     public void createNewFile(string username, string password, string fileName, string fileHash)
     {
-        throw new NotImplementedException();
+        UserContainer.Instance.createNewFile(username, password, fileName, fileHash);
     }
 
     public void deleteFile(string username, string password, string fileName)

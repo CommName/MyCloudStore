@@ -8,11 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using Client.ServiceReference1;
 
 namespace Client
 {
     public partial class FileManagerDialog : UserControl
     {
+        ICloudService proxy;
+        string username;
+        string password;
         public FileManagerDialog()
         {
             InitializeComponent();
@@ -22,6 +26,20 @@ namespace Client
             this.cryptoComboBox.SelectedIndex = 0;
             setForRC4();
         }
+
+        public FileManagerDialog(string username, string password, ICloudService proxy, List<String> fileNames)
+            : this()
+        {
+            this.proxy = proxy;
+            this.username = username;
+            this.password = password;
+            this.file_list.Items.Clear();
+            foreach(string file in fileNames)
+            {
+                this.file_list.Items.Add(file);
+            }
+        }
+
         private enum AlgorithmIndex { 
             RC4=0,
             A52=1,
@@ -62,18 +80,25 @@ namespace Client
             try
             {
                 CryptoLibrary.CryptoAlgo block = this.cryptoFactory.getCryptoAlgo();
-                
-                this.OFD.ShowDialog();
-                byte[] input = File.ReadAllBytes(this.OFD.FileName);
-                byte[] output;
-                block.encrypth(input, out output);
 
-                this.SFD.ShowDialog();
-                using (FileStream stream = new FileStream(this.SFD.FileName, FileMode.Create))
+                if (this.OFD.ShowDialog() == DialogResult.OK)
                 {
-                    using (BinaryWriter sw = new BinaryWriter(stream))
+                    byte[] input = File.ReadAllBytes(this.OFD.FileName);
+                    byte[] hash = CryptoLibrary.TigerHash.TigerHashAlgo(input);
+                    byte[] output;
+                    block.encrypth(input, out output);
+                    this.proxy.createNewFile(this.username, this.password, this.OFD.SafeFileName, Encoding.ASCII.GetString(hash));
+                    uint chunkSize = this.proxy.getChunkSize();
+
+                    for(int i =0; i < output.Length; i+= (int)chunkSize*1024)
                     {
-                        sw.Write(output);
+                        var upperIndex = output.Length - i > chunkSize * 1024 ? (int)chunkSize * 1024 : output.Length - i;
+                        byte[] send = new byte[upperIndex];
+                        for(var j = 0; j < upperIndex; j++)
+                        {
+                            send[j] = output[i + j];
+                        }
+                        this.proxy.uploadData(username, password, this.OFD.SafeFileName, send, 0);
                     }
                 }
             }

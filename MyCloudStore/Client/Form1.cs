@@ -56,7 +56,7 @@ namespace Client
             {
                 List<string> fileNames = proxy.getYourFileNames(username, password);
                 this.Controls.Clear();
-                var fmd = new FileManagerDialog();
+                var fmd = new FileManagerDialog(username, password, proxy, fileNames);
                 this.Width = 540;
                 this.Height = 370;
                 fmd.Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Right;
