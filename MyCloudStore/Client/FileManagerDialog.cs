@@ -151,16 +151,15 @@ namespace Client
                         downloadFileRequest downloadFileRequest = new downloadFileRequest(username, password, file, offset);
                         downloadFileResponse downloadFileResponse = new downloadFileResponse();
                         downloadFileResponse = proxy.downloadFile(downloadFileRequest);
-                        offset += chunksize;
-                        byte[] newInput = new byte[input.Length + downloadFileResponse.data.Length];
-                        System.Buffer.BlockCopy(input, 0, newInput, 0, input.Length);
-                        System.Buffer.BlockCopy(downloadFileResponse.data, 0, newInput, input.Length, downloadFileResponse.data.Length);
-                        input = newInput;
-
+                        done = downloadFileResponse.downloadFileResult;
+                        offset += 1;
+                        int asd = input.Length;
+                        Array.Resize(ref input, input.Length + downloadFileResponse.data.Length);
+                        downloadFileResponse.data.CopyTo(input, asd);
                     }
 
                     byte[] output;
-                    block.encrypth(input, out output);
+                    block.decrypth(input, out output);
 
                     using (FileStream stream = new FileStream(saveFile, FileMode.Create))
                     {
