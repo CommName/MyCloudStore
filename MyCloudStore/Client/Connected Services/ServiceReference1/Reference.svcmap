@@ -27,7 +27,6 @@
     <MetadataFile FileName="CloudService.disco" MetadataType="Disco" ID="7a7a4209-086d-4ae4-b2ee-42c869f192a7" SourceId="1" SourceUrl="http://localhost:54023/CloudService.svc?disco" />
     <MetadataFile FileName="CloudService.wsdl" MetadataType="Wsdl" ID="3878fa64-0c61-472a-b3cf-1cdf34653467" SourceId="1" SourceUrl="http://localhost:54023/CloudService.svc?wsdl" />
     <MetadataFile FileName="CloudService.xsd" MetadataType="Schema" ID="ff4bd75f-43d1-4241-9375-aac76db36018" SourceId="1" SourceUrl="http://localhost:54023/CloudService.svc?xsd=xsd0" />
-    <MetadataFile FileName="CloudService3.xsd" MetadataType="Schema" ID="2e504bd8-a7b1-40ea-9d91-31256f1a3acd" SourceId="1" SourceUrl="http://localhost:54023/CloudService.svc?xsd=xsd4" />
     <MetadataFile FileName="CloudService31.xsd" MetadataType="Schema" ID="001f5d2a-0f56-4fd0-836c-8d43cd7365f8" SourceId="1" SourceUrl="http://localhost:54023/CloudService.svc?xsd=xsd3" />
     <MetadataFile FileName="CloudService2.xsd" MetadataType="Schema" ID="3757cc86-da57-4824-9a4a-6b9ce952c6b3" SourceId="1" SourceUrl="http://localhost:54023/CloudService.svc?xsd=xsd1" />
     <MetadataFile FileName="CloudService1.xsd" MetadataType="Schema" ID="b9ef7207-3412-4f43-8157-ddecb759e1cf" SourceId="1" SourceUrl="http://localhost:54023/CloudService.svc?xsd=xsd2" />

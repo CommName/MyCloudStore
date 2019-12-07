@@ -64,41 +64,48 @@ namespace Client.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICloudService/getYourFileNames", ReplyAction="http://tempuri.org/ICloudService/getYourFileNamesResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Client.ServiceReference1.ErrorMessages), Action="http://tempuri.org/ICloudService/getYourFileNamesErrorMessagesFault", Name="ErrorMessages", Namespace="http://schemas.datacontract.org/2004/07/")]
-        System.Collections.Generic.List<string> getYourFileNames(string username, string password);
+        System.Collections.Generic.List<string> getYourFileNames(string username, byte[] password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICloudService/getYourFileNames", ReplyAction="http://tempuri.org/ICloudService/getYourFileNamesResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<string>> getYourFileNamesAsync(string username, string password);
+        System.Threading.Tasks.Task<System.Collections.Generic.List<string>> getYourFileNamesAsync(string username, byte[] password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICloudService/getFileHash", ReplyAction="http://tempuri.org/ICloudService/getFileHashResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Client.ServiceReference1.ErrorMessages), Action="http://tempuri.org/ICloudService/getFileHashErrorMessagesFault", Name="ErrorMessages", Namespace="http://schemas.datacontract.org/2004/07/")]
+        byte[] getFileHash(string username, byte[] password, string fileName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICloudService/getFileHash", ReplyAction="http://tempuri.org/ICloudService/getFileHashResponse")]
+        System.Threading.Tasks.Task<byte[]> getFileHashAsync(string username, byte[] password, string fileName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICloudService/getChunkSize", ReplyAction="http://tempuri.org/ICloudService/getChunkSizeResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://tempuri.org/ICloudService/getChunkSizeExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Client.ServiceReference1.ErrorMessages), Action="http://tempuri.org/ICloudService/getChunkSizeErrorMessagesFault", Name="ErrorMessages", Namespace="http://schemas.datacontract.org/2004/07/")]
         uint getChunkSize();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICloudService/getChunkSize", ReplyAction="http://tempuri.org/ICloudService/getChunkSizeResponse")]
         System.Threading.Tasks.Task<uint> getChunkSizeAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICloudService/createNewFile", ReplyAction="http://tempuri.org/ICloudService/createNewFileResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://tempuri.org/ICloudService/createNewFileExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
-        void createNewFile(string username, string password, string fileName, string fileHash);
+        [System.ServiceModel.FaultContractAttribute(typeof(Client.ServiceReference1.ErrorMessages), Action="http://tempuri.org/ICloudService/createNewFileErrorMessagesFault", Name="ErrorMessages", Namespace="http://schemas.datacontract.org/2004/07/")]
+        void createNewFile(string username, byte[] password, string fileName, byte[] fileHash);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICloudService/createNewFile", ReplyAction="http://tempuri.org/ICloudService/createNewFileResponse")]
-        System.Threading.Tasks.Task createNewFileAsync(string username, string password, string fileName, string fileHash);
+        System.Threading.Tasks.Task createNewFileAsync(string username, byte[] password, string fileName, byte[] fileHash);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICloudService/deleteFile", ReplyAction="http://tempuri.org/ICloudService/deleteFileResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://tempuri.org/ICloudService/deleteFileExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
-        void deleteFile(string username, string password, string fileName);
+        [System.ServiceModel.FaultContractAttribute(typeof(Client.ServiceReference1.ErrorMessages), Action="http://tempuri.org/ICloudService/deleteFileErrorMessagesFault", Name="ErrorMessages", Namespace="http://schemas.datacontract.org/2004/07/")]
+        void deleteFile(string username, byte[] password, string fileName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICloudService/deleteFile", ReplyAction="http://tempuri.org/ICloudService/deleteFileResponse")]
-        System.Threading.Tasks.Task deleteFileAsync(string username, string password, string fileName);
+        System.Threading.Tasks.Task deleteFileAsync(string username, byte[] password, string fileName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICloudService/uploadData", ReplyAction="http://tempuri.org/ICloudService/uploadDataResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://tempuri.org/ICloudService/uploadDataExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
-        void uploadData(string username, string password, string fileName, byte[] data, int size);
+        [System.ServiceModel.FaultContractAttribute(typeof(Client.ServiceReference1.ErrorMessages), Action="http://tempuri.org/ICloudService/uploadDataErrorMessagesFault", Name="ErrorMessages", Namespace="http://schemas.datacontract.org/2004/07/")]
+        void uploadData(string username, byte[] password, string fileName, byte[] data);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICloudService/uploadData", ReplyAction="http://tempuri.org/ICloudService/uploadDataResponse")]
-        System.Threading.Tasks.Task uploadDataAsync(string username, string password, string fileName, byte[] data, int size);
+        System.Threading.Tasks.Task uploadDataAsync(string username, byte[] password, string fileName, byte[] data);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICloudService/downloadFile", ReplyAction="http://tempuri.org/ICloudService/downloadFileResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://tempuri.org/ICloudService/downloadFileExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Client.ServiceReference1.ErrorMessages), Action="http://tempuri.org/ICloudService/downloadFileErrorMessagesFault", Name="ErrorMessages", Namespace="http://schemas.datacontract.org/2004/07/")]
         Client.ServiceReference1.downloadFileResponse downloadFile(Client.ServiceReference1.downloadFileRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
@@ -106,11 +113,11 @@ namespace Client.ServiceReference1 {
         System.Threading.Tasks.Task<Client.ServiceReference1.downloadFileResponse> downloadFileAsync(Client.ServiceReference1.downloadFileRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICloudService/RegisterUser", ReplyAction="http://tempuri.org/ICloudService/RegisterUserResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://tempuri.org/ICloudService/RegisterUserExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
-        void RegisterUser(string username, string password);
+        [System.ServiceModel.FaultContractAttribute(typeof(Client.ServiceReference1.ErrorMessages), Action="http://tempuri.org/ICloudService/RegisterUserErrorMessagesFault", Name="ErrorMessages", Namespace="http://schemas.datacontract.org/2004/07/")]
+        void RegisterUser(string username, byte[] password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICloudService/RegisterUser", ReplyAction="http://tempuri.org/ICloudService/RegisterUserResponse")]
-        System.Threading.Tasks.Task RegisterUserAsync(string username, string password);
+        System.Threading.Tasks.Task RegisterUserAsync(string username, byte[] password);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -122,7 +129,7 @@ namespace Client.ServiceReference1 {
         public string username;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
-        public string password;
+        public byte[] password;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
         public string fileName;
@@ -133,7 +140,7 @@ namespace Client.ServiceReference1 {
         public downloadFileRequest() {
         }
         
-        public downloadFileRequest(string username, string password, string fileName, uint offset) {
+        public downloadFileRequest(string username, byte[] password, string fileName, uint offset) {
             this.username = username;
             this.password = password;
             this.fileName = fileName;
@@ -188,12 +195,20 @@ namespace Client.ServiceReference1 {
                 base(binding, remoteAddress) {
         }
         
-        public System.Collections.Generic.List<string> getYourFileNames(string username, string password) {
+        public System.Collections.Generic.List<string> getYourFileNames(string username, byte[] password) {
             return base.Channel.getYourFileNames(username, password);
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<string>> getYourFileNamesAsync(string username, string password) {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<string>> getYourFileNamesAsync(string username, byte[] password) {
             return base.Channel.getYourFileNamesAsync(username, password);
+        }
+        
+        public byte[] getFileHash(string username, byte[] password, string fileName) {
+            return base.Channel.getFileHash(username, password, fileName);
+        }
+        
+        public System.Threading.Tasks.Task<byte[]> getFileHashAsync(string username, byte[] password, string fileName) {
+            return base.Channel.getFileHashAsync(username, password, fileName);
         }
         
         public uint getChunkSize() {
@@ -204,28 +219,28 @@ namespace Client.ServiceReference1 {
             return base.Channel.getChunkSizeAsync();
         }
         
-        public void createNewFile(string username, string password, string fileName, string fileHash) {
+        public void createNewFile(string username, byte[] password, string fileName, byte[] fileHash) {
             base.Channel.createNewFile(username, password, fileName, fileHash);
         }
         
-        public System.Threading.Tasks.Task createNewFileAsync(string username, string password, string fileName, string fileHash) {
+        public System.Threading.Tasks.Task createNewFileAsync(string username, byte[] password, string fileName, byte[] fileHash) {
             return base.Channel.createNewFileAsync(username, password, fileName, fileHash);
         }
         
-        public void deleteFile(string username, string password, string fileName) {
+        public void deleteFile(string username, byte[] password, string fileName) {
             base.Channel.deleteFile(username, password, fileName);
         }
         
-        public System.Threading.Tasks.Task deleteFileAsync(string username, string password, string fileName) {
+        public System.Threading.Tasks.Task deleteFileAsync(string username, byte[] password, string fileName) {
             return base.Channel.deleteFileAsync(username, password, fileName);
         }
         
-        public void uploadData(string username, string password, string fileName, byte[] data, int size) {
-            base.Channel.uploadData(username, password, fileName, data, size);
+        public void uploadData(string username, byte[] password, string fileName, byte[] data) {
+            base.Channel.uploadData(username, password, fileName, data);
         }
         
-        public System.Threading.Tasks.Task uploadDataAsync(string username, string password, string fileName, byte[] data, int size) {
-            return base.Channel.uploadDataAsync(username, password, fileName, data, size);
+        public System.Threading.Tasks.Task uploadDataAsync(string username, byte[] password, string fileName, byte[] data) {
+            return base.Channel.uploadDataAsync(username, password, fileName, data);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -233,7 +248,7 @@ namespace Client.ServiceReference1 {
             return base.Channel.downloadFile(request);
         }
         
-        public bool downloadFile(string username, string password, string fileName, uint offset, out byte[] data) {
+        public bool downloadFile(string username, byte[] password, string fileName, uint offset, out byte[] data) {
             Client.ServiceReference1.downloadFileRequest inValue = new Client.ServiceReference1.downloadFileRequest();
             inValue.username = username;
             inValue.password = password;
@@ -248,11 +263,11 @@ namespace Client.ServiceReference1 {
             return base.Channel.downloadFileAsync(request);
         }
         
-        public void RegisterUser(string username, string password) {
+        public void RegisterUser(string username, byte[] password) {
             base.Channel.RegisterUser(username, password);
         }
         
-        public System.Threading.Tasks.Task RegisterUserAsync(string username, string password) {
+        public System.Threading.Tasks.Task RegisterUserAsync(string username, byte[] password) {
             return base.Channel.RegisterUserAsync(username, password);
         }
     }

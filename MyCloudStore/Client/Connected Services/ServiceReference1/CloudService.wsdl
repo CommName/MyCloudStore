@@ -6,7 +6,6 @@
       <xsd:import schemaLocation="http://localhost:54023/CloudService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/" />
       <xsd:import schemaLocation="http://localhost:54023/CloudService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:54023/CloudService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-      <xsd:import schemaLocation="http://localhost:54023/CloudService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ICloudService_getYourFileNames_InputMessage">
@@ -18,14 +17,23 @@
   <wsdl:message name="ICloudService_getYourFileNames_ErrorMessagesFault_FaultMessage">
     <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/" name="detail" element="q1:ErrorMessages" />
   </wsdl:message>
+  <wsdl:message name="ICloudService_getFileHash_InputMessage">
+    <wsdl:part name="parameters" element="tns:getFileHash" />
+  </wsdl:message>
+  <wsdl:message name="ICloudService_getFileHash_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getFileHashResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICloudService_getFileHash_ErrorMessagesFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/" name="detail" element="q2:ErrorMessages" />
+  </wsdl:message>
   <wsdl:message name="ICloudService_getChunkSize_InputMessage">
     <wsdl:part name="parameters" element="tns:getChunkSize" />
   </wsdl:message>
   <wsdl:message name="ICloudService_getChunkSize_OutputMessage">
     <wsdl:part name="parameters" element="tns:getChunkSizeResponse" />
   </wsdl:message>
-  <wsdl:message name="ICloudService_getChunkSize_ExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/System" name="detail" element="q2:Exception" />
+  <wsdl:message name="ICloudService_getChunkSize_ErrorMessagesFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/" name="detail" element="q3:ErrorMessages" />
   </wsdl:message>
   <wsdl:message name="ICloudService_createNewFile_InputMessage">
     <wsdl:part name="parameters" element="tns:createNewFile" />
@@ -33,8 +41,8 @@
   <wsdl:message name="ICloudService_createNewFile_OutputMessage">
     <wsdl:part name="parameters" element="tns:createNewFileResponse" />
   </wsdl:message>
-  <wsdl:message name="ICloudService_createNewFile_ExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/System" name="detail" element="q3:Exception" />
+  <wsdl:message name="ICloudService_createNewFile_ErrorMessagesFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/" name="detail" element="q4:ErrorMessages" />
   </wsdl:message>
   <wsdl:message name="ICloudService_deleteFile_InputMessage">
     <wsdl:part name="parameters" element="tns:deleteFile" />
@@ -42,8 +50,8 @@
   <wsdl:message name="ICloudService_deleteFile_OutputMessage">
     <wsdl:part name="parameters" element="tns:deleteFileResponse" />
   </wsdl:message>
-  <wsdl:message name="ICloudService_deleteFile_ExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/System" name="detail" element="q4:Exception" />
+  <wsdl:message name="ICloudService_deleteFile_ErrorMessagesFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/" name="detail" element="q5:ErrorMessages" />
   </wsdl:message>
   <wsdl:message name="ICloudService_uploadData_InputMessage">
     <wsdl:part name="parameters" element="tns:uploadData" />
@@ -51,8 +59,8 @@
   <wsdl:message name="ICloudService_uploadData_OutputMessage">
     <wsdl:part name="parameters" element="tns:uploadDataResponse" />
   </wsdl:message>
-  <wsdl:message name="ICloudService_uploadData_ExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/System" name="detail" element="q5:Exception" />
+  <wsdl:message name="ICloudService_uploadData_ErrorMessagesFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/" name="detail" element="q6:ErrorMessages" />
   </wsdl:message>
   <wsdl:message name="ICloudService_downloadFile_InputMessage">
     <wsdl:part name="parameters" element="tns:downloadFile" />
@@ -60,8 +68,8 @@
   <wsdl:message name="ICloudService_downloadFile_OutputMessage">
     <wsdl:part name="parameters" element="tns:downloadFileResponse" />
   </wsdl:message>
-  <wsdl:message name="ICloudService_downloadFile_ExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/System" name="detail" element="q6:Exception" />
+  <wsdl:message name="ICloudService_downloadFile_ErrorMessagesFault_FaultMessage">
+    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/" name="detail" element="q7:ErrorMessages" />
   </wsdl:message>
   <wsdl:message name="ICloudService_RegisterUser_InputMessage">
     <wsdl:part name="parameters" element="tns:RegisterUser" />
@@ -69,8 +77,8 @@
   <wsdl:message name="ICloudService_RegisterUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:RegisterUserResponse" />
   </wsdl:message>
-  <wsdl:message name="ICloudService_RegisterUser_ExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/System" name="detail" element="q7:Exception" />
+  <wsdl:message name="ICloudService_RegisterUser_ErrorMessagesFault_FaultMessage">
+    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/" name="detail" element="q8:ErrorMessages" />
   </wsdl:message>
   <wsdl:portType name="ICloudService">
     <wsdl:operation name="getYourFileNames">
@@ -78,41 +86,58 @@
       <wsdl:output wsaw:Action="http://tempuri.org/ICloudService/getYourFileNamesResponse" message="tns:ICloudService_getYourFileNames_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/ICloudService/getYourFileNamesErrorMessagesFault" name="ErrorMessagesFault" message="tns:ICloudService_getYourFileNames_ErrorMessagesFault_FaultMessage" />
     </wsdl:operation>
+    <wsdl:operation name="getFileHash">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICloudService/getFileHash" message="tns:ICloudService_getFileHash_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICloudService/getFileHashResponse" message="tns:ICloudService_getFileHash_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICloudService/getFileHashErrorMessagesFault" name="ErrorMessagesFault" message="tns:ICloudService_getFileHash_ErrorMessagesFault_FaultMessage" />
+    </wsdl:operation>
     <wsdl:operation name="getChunkSize">
       <wsdl:input wsaw:Action="http://tempuri.org/ICloudService/getChunkSize" message="tns:ICloudService_getChunkSize_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICloudService/getChunkSizeResponse" message="tns:ICloudService_getChunkSize_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/ICloudService/getChunkSizeExceptionFault" name="ExceptionFault" message="tns:ICloudService_getChunkSize_ExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICloudService/getChunkSizeErrorMessagesFault" name="ErrorMessagesFault" message="tns:ICloudService_getChunkSize_ErrorMessagesFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="createNewFile">
       <wsdl:input wsaw:Action="http://tempuri.org/ICloudService/createNewFile" message="tns:ICloudService_createNewFile_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICloudService/createNewFileResponse" message="tns:ICloudService_createNewFile_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/ICloudService/createNewFileExceptionFault" name="ExceptionFault" message="tns:ICloudService_createNewFile_ExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICloudService/createNewFileErrorMessagesFault" name="ErrorMessagesFault" message="tns:ICloudService_createNewFile_ErrorMessagesFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="deleteFile">
       <wsdl:input wsaw:Action="http://tempuri.org/ICloudService/deleteFile" message="tns:ICloudService_deleteFile_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICloudService/deleteFileResponse" message="tns:ICloudService_deleteFile_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/ICloudService/deleteFileExceptionFault" name="ExceptionFault" message="tns:ICloudService_deleteFile_ExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICloudService/deleteFileErrorMessagesFault" name="ErrorMessagesFault" message="tns:ICloudService_deleteFile_ErrorMessagesFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="uploadData">
       <wsdl:input wsaw:Action="http://tempuri.org/ICloudService/uploadData" message="tns:ICloudService_uploadData_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICloudService/uploadDataResponse" message="tns:ICloudService_uploadData_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/ICloudService/uploadDataExceptionFault" name="ExceptionFault" message="tns:ICloudService_uploadData_ExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICloudService/uploadDataErrorMessagesFault" name="ErrorMessagesFault" message="tns:ICloudService_uploadData_ErrorMessagesFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="downloadFile">
       <wsdl:input wsaw:Action="http://tempuri.org/ICloudService/downloadFile" message="tns:ICloudService_downloadFile_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICloudService/downloadFileResponse" message="tns:ICloudService_downloadFile_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/ICloudService/downloadFileExceptionFault" name="ExceptionFault" message="tns:ICloudService_downloadFile_ExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICloudService/downloadFileErrorMessagesFault" name="ErrorMessagesFault" message="tns:ICloudService_downloadFile_ErrorMessagesFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="RegisterUser">
       <wsdl:input wsaw:Action="http://tempuri.org/ICloudService/RegisterUser" message="tns:ICloudService_RegisterUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICloudService/RegisterUserResponse" message="tns:ICloudService_RegisterUser_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/ICloudService/RegisterUserExceptionFault" name="ExceptionFault" message="tns:ICloudService_RegisterUser_ExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICloudService/RegisterUserErrorMessagesFault" name="ErrorMessagesFault" message="tns:ICloudService_RegisterUser_ErrorMessagesFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ICloudService" type="tns:ICloudService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="getYourFileNames">
       <soap:operation soapAction="http://tempuri.org/ICloudService/getYourFileNames" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorMessagesFault">
+        <soap:fault use="literal" name="ErrorMessagesFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getFileHash">
+      <soap:operation soapAction="http://tempuri.org/ICloudService/getFileHash" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -131,8 +156,8 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ExceptionFault">
-        <soap:fault use="literal" name="ExceptionFault" namespace="" />
+      <wsdl:fault name="ErrorMessagesFault">
+        <soap:fault use="literal" name="ErrorMessagesFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="createNewFile">
@@ -143,8 +168,8 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ExceptionFault">
-        <soap:fault use="literal" name="ExceptionFault" namespace="" />
+      <wsdl:fault name="ErrorMessagesFault">
+        <soap:fault use="literal" name="ErrorMessagesFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="deleteFile">
@@ -155,8 +180,8 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ExceptionFault">
-        <soap:fault use="literal" name="ExceptionFault" namespace="" />
+      <wsdl:fault name="ErrorMessagesFault">
+        <soap:fault use="literal" name="ErrorMessagesFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="uploadData">
@@ -167,8 +192,8 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ExceptionFault">
-        <soap:fault use="literal" name="ExceptionFault" namespace="" />
+      <wsdl:fault name="ErrorMessagesFault">
+        <soap:fault use="literal" name="ErrorMessagesFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="downloadFile">
@@ -179,8 +204,8 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ExceptionFault">
-        <soap:fault use="literal" name="ExceptionFault" namespace="" />
+      <wsdl:fault name="ErrorMessagesFault">
+        <soap:fault use="literal" name="ErrorMessagesFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="RegisterUser">
@@ -191,8 +216,8 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ExceptionFault">
-        <soap:fault use="literal" name="ExceptionFault" namespace="" />
+      <wsdl:fault name="ErrorMessagesFault">
+        <soap:fault use="literal" name="ErrorMessagesFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>

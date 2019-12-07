@@ -12,12 +12,12 @@ public class User
 {
     public int Id { get; set; }
     public string Username { get; set; }
-    public string Password { get; set; }
+    public byte[] Password { get; set; }
     public ICollection<UserFiles> Files { get; set; }
 
-    public void CreateNewFile(string username, string password, string fileName, string fileHash)
+    public void CreateNewFile(string username, byte[] password, string fileName, byte[] fileHash)
     {
-        if (username != this.Username || this.Password != password)
+        if (username != this.Username || !this.Password.SequenceEqual(password))
         {
             throw new FaultException<ErrorMessages>(new ErrorMessages("Wrong username or password!"));
         }
@@ -42,9 +42,27 @@ public class User
 
     }
 
-    public UserFiles deleteFile(string username, string password, string fileName)
+    public byte[] getFileHash(string username, byte[] password, string fileName)
     {
-        if (username != this.Username || this.Password != password)
+        if (username != this.Username || !this.Password.SequenceEqual(password))
+        {
+            throw new FaultException<ErrorMessages>(new ErrorMessages("Wrong username or password!"));
+        }
+        //Provera da li fajl postoji
+
+        foreach (UserFiles file in Files)
+        {
+            if (file.fileName == fileName)
+            {
+                return file.hash;
+            }
+        }
+        throw new FaultException<ErrorMessages>(new ErrorMessages("File not found!"));
+    }
+
+    public UserFiles deleteFile(string username, byte[] password, string fileName)
+    {
+        if (username != this.Username || !this.Password.SequenceEqual(password))
         {
             throw new FaultException<ErrorMessages>(new ErrorMessages("Wrong username or password!"));
         }
@@ -65,15 +83,14 @@ public class User
 
     }
 
-    public bool getFileBytes(string username, string password, string fileName, out byte[] data, uint offset, int chunkSize)
+    public bool getFileBytes(string username, byte[] password, string fileName, out byte[] data, uint offset, int chunkSize)
     {
-        if (username != this.Username || this.Password != password)
+        if (username != this.Username || !this.Password.SequenceEqual(password))
         {
             throw new FaultException<ErrorMessages>(new ErrorMessages("Wrong username or password!"));
-
         }
-        
-        foreach(UserFiles file in Files)
+
+        foreach (UserFiles file in Files)
         {
             if(file.fileName == fileName)
             {
@@ -105,9 +122,9 @@ public class User
 
     }
 
-    public void appendData(string username, string password, string fileName, byte[] data, int size)
+    public void appendData(string username, byte[] password, string fileName, byte[] data)
     {
-        if (username != this.Username || this.Password != password)
+        if (username != this.Username || !this.Password.SequenceEqual(password))
         {
             throw new FaultException<ErrorMessages>(new ErrorMessages("Wrong username or password!"));
         }
@@ -133,9 +150,9 @@ public class User
 
     }
 
-    public List<string> getFileNames(string username, string password)
+    public List<string> getFileNames(string username, byte[] password)
     {
-        if (username != this.Username || this.Password != password)
+        if (username != this.Username || !this.Password.SequenceEqual(password))
         {
             throw new FaultException<ErrorMessages>(new ErrorMessages("Wrong username or password!"));
         }

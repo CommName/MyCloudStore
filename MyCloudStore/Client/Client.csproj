@@ -132,9 +132,6 @@
     <None Include="Connected Services\ServiceReference1\CloudService2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServiceReference1\CloudService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Connected Services\ServiceReference1\CloudService31.xsd">
       <SubType>Designer</SubType>
     </None>

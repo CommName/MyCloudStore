@@ -32,7 +32,7 @@ public class UserContainer
         Database.SetInitializer(new DropCreateDatabaseIfModelChanges<UserDBContext>());
     }
 
-    public void registerUser(string username, string password)
+    public void registerUser(string username, byte[] password)
     {
         using (var db = new UserDBContext())
         {
@@ -54,7 +54,7 @@ public class UserContainer
         }
     }
 
-    public void createNewFile(string username, string password, string fileName, string fileHash)
+    public void createNewFile(string username, byte[] password, string fileName, byte[] fileHash)
     {
         using (var db = new UserDBContext())
         {
@@ -63,7 +63,7 @@ public class UserContainer
             db.SaveChanges();
         }
     }
-    public void deleteFile(string username, string password, string fileName)
+    public void deleteFile(string username, byte[] password, string fileName)
     {
         using (var db = new UserDBContext())
         {

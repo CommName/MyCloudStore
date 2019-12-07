@@ -10,14 +10,14 @@ using System.Windows.Forms;
 using System.IO;
 using Client.ServiceReference1;
 using System.Threading;
-
+using System.Linq;
 namespace Client
 {
     public partial class FileManagerDialog : UserControl
     {
         ICloudService proxy;
         string username;
-        string password;
+        byte[] password;
         public FileManagerDialog()
         {
             InitializeComponent();
@@ -28,7 +28,7 @@ namespace Client
             setForRC4();
         }
 
-        public FileManagerDialog(string username, string password, ICloudService proxy, List<String> fileNames)
+        public FileManagerDialog(string username, byte[] password, ICloudService proxy, List<String> fileNames)
             : this()
         {
             this.proxy = proxy;
@@ -99,7 +99,7 @@ namespace Client
                     byte[] hash = CryptoLibrary.TigerHash.TigerHashAlgo(input);
                     byte[] output;
                     block.encrypth(input, out output);
-                    this.proxy.createNewFile(this.username, this.password, this.OFD.SafeFileName, Encoding.ASCII.GetString(hash));
+                    this.proxy.createNewFile(this.username, this.password, this.OFD.SafeFileName, hash);
                     uint chunkSize = this.proxy.getChunkSize();
 
                     for(int i =0; i < output.Length; i+= (int)chunkSize*1024)
@@ -110,7 +110,7 @@ namespace Client
                         {
                             send[j] = output[i + j];
                         }
-                        this.proxy.uploadData(username, password, this.OFD.SafeFileName, send, 0);
+                        this.proxy.uploadData(username, password, this.OFD.SafeFileName, send);
                     }
                     this.updateFileList();
                 }
@@ -123,11 +123,6 @@ namespace Client
                 }
             }
 
-        }
-
-        private void downloadFile()
-        {
-           
         }
 
         private void download_button_Click(object sender, EventArgs e)
@@ -160,6 +155,15 @@ namespace Client
 
                     byte[] output;
                     block.decrypth(input, out output);
+
+                    byte[] hashFile = CryptoLibrary.TigerHash.TigerHashAlgo(output);
+                    byte[] originalHash = proxy.getFileHash(username, password, file);
+                    
+                    if (!originalHash.SequenceEqual(hashFile))
+                    {
+                        MessageBox.Show("Error decoding file!");
+                        return;
+                    }
 
                     using (FileStream stream = new FileStream(saveFile, FileMode.Create))
                     {

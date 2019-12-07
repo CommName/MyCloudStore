@@ -11,30 +11,34 @@ public interface ICloudService
 {
     [OperationContract]
     [FaultContract (typeof(ErrorMessages))]
-    List<String> getYourFileNames(string username, string password);
-    
+    List<String> getYourFileNames(string username, byte[] password);
+
+    [OperationContract]
+    [FaultContract(typeof(ErrorMessages))]
+    byte[] getFileHash(string username, byte[] password, string fileName);
+
     [OperationContract]
     [FaultContract(typeof(ErrorMessages))]
     uint getChunkSize();
 
     [OperationContract]
     [FaultContract(typeof(ErrorMessages))]
-    void createNewFile(string username, string password, string fileName, string fileHash);
+    void createNewFile(string username, byte[] password, string fileName, byte[] fileHash);
 
     [OperationContract]
     [FaultContract(typeof(ErrorMessages))]
-    void deleteFile(string username, string password, string fileName);
+    void deleteFile(string username, byte[] password, string fileName);
 
     [OperationContract]
     [FaultContract(typeof(ErrorMessages))]
-    void uploadData(string username, string password, string fileName, byte[] data, int size);
+    void uploadData(string username, byte[] password, string fileName, byte[] data);
 
     [OperationContract]
     [FaultContract(typeof(ErrorMessages))]
-    bool downloadFile(string username, string password, string fileName, out byte[] data, uint offset);
+    bool downloadFile(string username, byte[] password, string fileName, out byte[] data, uint offset);
 
     [OperationContract]
     [FaultContract(typeof(ErrorMessages))]
-    void RegisterUser(string username, string password);
+    void RegisterUser(string username, byte[] password);
 
 }

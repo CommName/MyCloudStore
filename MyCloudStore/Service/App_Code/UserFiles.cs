@@ -10,7 +10,7 @@ public class UserFiles
 {
     public int Id { get; set; }
     public string fileName { get; set; }
-    public string hash { get; set; }
+    public byte[] hash { get; set; }
 
     public int UserID { get; set; }
     [ForeignKey("UserID")]
