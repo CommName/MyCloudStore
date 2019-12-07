@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.IO;
+using System.ServiceModel;
 
 /// <summary>
 /// Summary description for User
@@ -18,14 +19,14 @@ public class User
     {
         if (username != this.Username || this.Password != password)
         {
-            throw new Exception("Wrong username or password!");
+            throw new FaultException<ErrorMessages>(new ErrorMessages("Wrong username or password!"));
         }
         //Proverava da li fajl vec postoji
-        foreach(UserFiles file in Files)
+        foreach (UserFiles file in Files)
         {
             if(file.fileName == fileName)
             {
-                throw new Exception("File already exists");
+                throw new FaultException<ErrorMessages>(new ErrorMessages("File with the same name already exists"));
             }
         }
         UserFiles noviFajl = new UserFiles();
@@ -45,7 +46,7 @@ public class User
     {
         if (username != this.Username || this.Password != password)
         {
-            throw new Exception("Wrong username or password!");
+            throw new FaultException<ErrorMessages>(new ErrorMessages("Wrong username or password!"));
         }
         //Provera da li fajl postoji
 
@@ -60,15 +61,16 @@ public class User
                 return file;
             }
         }
+        throw new FaultException<ErrorMessages>(new ErrorMessages("File not found!"));
 
-        throw new Exception("File not found!");
     }
 
     public bool getFileBytes(string username, string password, string fileName, out byte[] data, uint offset, int chunkSize)
     {
         if (username != this.Username || this.Password != password)
         {
-            throw new Exception("Wrong username or password!");
+            throw new FaultException<ErrorMessages>(new ErrorMessages("Wrong username or password!"));
+
         }
         
         foreach(UserFiles file in Files)
@@ -80,7 +82,8 @@ public class User
                 {
                     if (stream.Length < offset*1024)
                     {
-                        throw new Exception("File is not big enough");
+                        throw new FaultException<ErrorMessages>(new ErrorMessages("File not big enough"));
+
                     }
                     stream.Seek(offset*1024,SeekOrigin.Begin);
                     using (var sw = new BinaryReader(stream))
@@ -98,15 +101,15 @@ public class User
                 }
             }
         }
+        throw new FaultException<ErrorMessages>(new ErrorMessages("File not found"));
 
-        throw new Exception("File not found!");
     }
 
     public void appendData(string username, string password, string fileName, byte[] data, int size)
     {
         if (username != this.Username || this.Password != password)
         {
-            throw new Exception("Wrong username or password!");
+            throw new FaultException<ErrorMessages>(new ErrorMessages("Wrong username or password!"));
         }
 
         foreach (UserFiles file in Files)
@@ -126,15 +129,15 @@ public class User
                 return;
             }
         }
+        throw new FaultException<ErrorMessages>(new ErrorMessages("File not found!"));
 
-        throw new Exception("File not found!");
     }
 
     public List<string> getFileNames(string username, string password)
     {
         if (username != this.Username || this.Password != password)
         {
-            throw new Exception("Wrong username or password!");
+            throw new FaultException<ErrorMessages>(new ErrorMessages("Wrong username or password!"));
         }
         List<string> ret = new List<string>();
         foreach(UserFiles file in Files)

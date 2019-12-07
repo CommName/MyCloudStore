@@ -14,27 +14,27 @@ public interface ICloudService
     List<String> getYourFileNames(string username, string password);
     
     [OperationContract]
-    [FaultContract(typeof(Exception))]
+    [FaultContract(typeof(ErrorMessages))]
     uint getChunkSize();
 
     [OperationContract]
-    [FaultContract(typeof(Exception))]
+    [FaultContract(typeof(ErrorMessages))]
     void createNewFile(string username, string password, string fileName, string fileHash);
 
     [OperationContract]
-    [FaultContract(typeof(Exception))]
+    [FaultContract(typeof(ErrorMessages))]
     void deleteFile(string username, string password, string fileName);
 
     [OperationContract]
-    [FaultContract(typeof(Exception))]
+    [FaultContract(typeof(ErrorMessages))]
     void uploadData(string username, string password, string fileName, byte[] data, int size);
 
     [OperationContract]
-    [FaultContract(typeof(Exception))]
+    [FaultContract(typeof(ErrorMessages))]
     bool downloadFile(string username, string password, string fileName, out byte[] data, uint offset);
 
     [OperationContract]
-    [FaultContract(typeof(Exception))]
+    [FaultContract(typeof(ErrorMessages))]
     void RegisterUser(string username, string password);
 
 }
