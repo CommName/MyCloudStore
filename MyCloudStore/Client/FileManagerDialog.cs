@@ -98,21 +98,27 @@ namespace Client
                     byte[] input = File.ReadAllBytes(this.OFD.FileName);
                     byte[] hash = CryptoLibrary.TigerHash.TigerHashAlgo(input);
                     byte[] output;
-                    block.encrypth(input, out output);
-                    this.proxy.createNewFile(this.username, this.password, this.OFD.SafeFileName, hash);
-                    uint chunkSize = this.proxy.getChunkSize();
-
-                    for(int i =0; i < output.Length; i+= (int)chunkSize*1024)
+                    Thread uploadfileThread = new Thread(() =>
                     {
-                        var upperIndex = output.Length - i > chunkSize * 1024 ? (int)chunkSize * 1024 : output.Length - i;
-                        byte[] send = new byte[upperIndex];
-                        for(var j = 0; j < upperIndex; j++)
+                        block.encrypth(input, out output);
+                        this.proxy.createNewFile(this.username, this.password, this.OFD.SafeFileName, hash);
+                        uint chunkSize = this.proxy.getChunkSize();
+
+                        for (int i = 0; i < output.Length; i += (int)chunkSize * 1024)
                         {
-                            send[j] = output[i + j];
+                            var upperIndex = output.Length - i > chunkSize * 1024 ? (int)chunkSize * 1024 : output.Length - i;
+                            byte[] send = new byte[upperIndex];
+                            for (var j = 0; j < upperIndex; j++)
+                            {
+                                send[j] = output[i + j];
+                            }
+                            this.proxy.uploadData(username, password, this.OFD.SafeFileName, send);
                         }
-                        this.proxy.uploadData(username, password, this.OFD.SafeFileName, send);
-                    }
-                    this.updateFileList();
+                        this.updateFileList();
+                    });
+
+                    uploadfileThread.Start();
+                    
                 }
             }
             catch (CryptoLibrary.CryptoAlgoErrors err)
