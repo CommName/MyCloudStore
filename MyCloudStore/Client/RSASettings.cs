@@ -46,6 +46,7 @@ namespace Client
                 q.Enabled = true;
                 this.e.Enabled = false;
                 this.d.Enabled = false;
+                this.n.Enabled = false;
             }
             else
             {
@@ -53,6 +54,7 @@ namespace Client
                 q.Enabled = false;
                 this.e.Enabled = true;
                 this.d.Enabled = true;
+                this.n.Enabled = true;
             }
         }
 
@@ -64,6 +66,7 @@ namespace Client
                 q.Enabled = true;
                 this.e.Enabled = false;
                 this.d.Enabled = false;
+                this.n.Enabled = false;
             }
             else
             {
@@ -71,6 +74,7 @@ namespace Client
                 q.Enabled = false;
                 this.e.Enabled = true;
                 this.d.Enabled = true;
+                this.n.Enabled = true;
             }
         }
 

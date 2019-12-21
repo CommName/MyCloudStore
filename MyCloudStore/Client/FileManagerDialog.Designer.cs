@@ -110,6 +110,8 @@
             // 
             // statusListBox
             // 
+            this.statusListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.statusListBox.FormattingEnabled = true;
             this.statusListBox.Location = new System.Drawing.Point(278, 278);
             this.statusListBox.Name = "statusListBox";

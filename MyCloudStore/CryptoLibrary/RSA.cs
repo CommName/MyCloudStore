@@ -158,7 +158,11 @@ namespace CryptoLibrary
 
         public CryptoAlgo getCopy()
         {
-            throw new NotImplementedException();
+            RSA copy = new RSA();
+            copy.d = this.d;
+            copy.e = this.e;
+            copy.n = this.n;
+            return copy;
         }
     }
 }
