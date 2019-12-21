@@ -24,6 +24,7 @@ namespace Client
             this.cryptoComboBox.Items.Add("RC4");
             this.cryptoComboBox.Items.Add("A52");
             this.cryptoComboBox.Items.Add("CTR");
+            this.cryptoComboBox.Items.Add("RSA");
             this.cryptoComboBox.SelectedIndex = 0;
             setForRC4();
         }
@@ -55,7 +56,8 @@ namespace Client
         private enum AlgorithmIndex { 
             RC4=0,
             A52=1,
-            CTR=2
+            CTR=2,
+            RSA =3
         }
 
         protected CryptoFactory cryptoFactory;
@@ -64,6 +66,13 @@ namespace Client
         {
             this.cryptoBox.Controls.Clear();
             var view = new RC4Settings();
+            cryptoFactory = view;
+            this.cryptoBox.Controls.Add(view);
+        }
+        protected void setForRSA()
+        {
+            this.cryptoBox.Controls.Clear();
+            var view = new RSASettings();
             cryptoFactory = view;
             this.cryptoBox.Controls.Add(view);
         }
@@ -217,6 +226,10 @@ namespace Client
             if (cryptoComboBox.SelectedIndex == (int)AlgorithmIndex.CTR)
             {
                 setForCTR();
+            }
+            if (cryptoComboBox.SelectedIndex == (int)AlgorithmIndex.RSA)
+            {
+                setForRSA();
             }
         }
 

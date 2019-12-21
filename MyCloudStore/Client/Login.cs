@@ -68,5 +68,7 @@ namespace Client
                 MessageBox.Show(er.Detail.Message);
             }
         }
+
+        
     }
 }

@@ -92,6 +92,12 @@
     <Compile Include="RC4Settings.Designer.cs">
       <DependentUpon>RC4Settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="RSASettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RSASettings.Designer.cs">
+      <DependentUpon>RSASettings.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="A52Settings.resx">
       <DependentUpon>A52Settings.cs</DependentUpon>
     </EmbeddedResource>
@@ -118,6 +124,9 @@
     </Compile>
     <EmbeddedResource Include="RC4Settings.resx">
       <DependentUpon>RC4Settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RSASettings.resx">
+      <DependentUpon>RSASettings.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Connected Services\ServiceReference1\Client.ServiceReference1.downloadFileResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
