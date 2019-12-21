@@ -37,6 +37,7 @@
             this.OFD = new System.Windows.Forms.OpenFileDialog();
             this.SFD = new System.Windows.Forms.SaveFileDialog();
             this.cryptoComboBox = new System.Windows.Forms.ComboBox();
+            this.statusListBox = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // file_list
@@ -88,7 +89,7 @@
             // 
             this.cryptoBox.Location = new System.Drawing.Point(278, 30);
             this.cryptoBox.Name = "cryptoBox";
-            this.cryptoBox.Size = new System.Drawing.Size(233, 291);
+            this.cryptoBox.Size = new System.Drawing.Size(233, 237);
             this.cryptoBox.TabIndex = 4;
             this.cryptoBox.TabStop = false;
             this.cryptoBox.Text = "Crypto settings";
@@ -101,16 +102,25 @@
             // 
             this.cryptoComboBox.FormattingEnabled = true;
             this.cryptoComboBox.Location = new System.Drawing.Point(278, 6);
-            this.cryptoComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cryptoComboBox.Margin = new System.Windows.Forms.Padding(2);
             this.cryptoComboBox.Name = "cryptoComboBox";
             this.cryptoComboBox.Size = new System.Drawing.Size(235, 21);
             this.cryptoComboBox.TabIndex = 0;
             this.cryptoComboBox.SelectedIndexChanged += new System.EventHandler(this.cryptoComboBox_SelectedIndexChanged_1);
             // 
+            // statusListBox
+            // 
+            this.statusListBox.FormattingEnabled = true;
+            this.statusListBox.Location = new System.Drawing.Point(278, 278);
+            this.statusListBox.Name = "statusListBox";
+            this.statusListBox.Size = new System.Drawing.Size(233, 43);
+            this.statusListBox.TabIndex = 0;
+            // 
             // FileManagerDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.statusListBox);
             this.Controls.Add(this.cryptoComboBox);
             this.Controls.Add(this.cryptoBox);
             this.Controls.Add(this.delete_button);
@@ -134,5 +144,6 @@
         private System.Windows.Forms.OpenFileDialog OFD;
         private System.Windows.Forms.SaveFileDialog SFD;
         private System.Windows.Forms.ComboBox cryptoComboBox;
+        private System.Windows.Forms.ListBox statusListBox;
     }
 }

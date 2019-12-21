@@ -100,7 +100,10 @@ namespace Client
                     byte[] output;
                     Thread uploadfileThread = new Thread(() =>
                     {
+                        this.statusListBox.Items.Add("Encrypting " + this.OFD.FileName);
                         block.encrypth(input, out output);
+                        this.statusListBox.Items.Remove("Encrypting " + this.OFD.FileName);
+                        this.statusListBox.Items.Add("Uploading " + this.OFD.FileName);
                         this.proxy.createNewFile(this.username, this.password, this.OFD.SafeFileName, hash);
                         uint chunkSize = this.proxy.getChunkSize();
 
@@ -114,6 +117,7 @@ namespace Client
                             }
                             this.proxy.uploadData(username, password, this.OFD.SafeFileName, send);
                         }
+                        this.statusListBox.Items.Remove("Uploading " + this.OFD.FileName);
                         this.updateFileList();
                     });
 
@@ -144,6 +148,7 @@ namespace Client
                     CryptoLibrary.CryptoAlgo block = this.cryptoFactory.getCryptoAlgo();
                     byte[] input = new byte[0];
                     //Skidanje sa servera
+                    this.statusListBox.Items.Add("Downloading " + file);
                     bool done = false;
                     uint offset = 0;
                     uint chunksize = proxy.getChunkSize();
@@ -160,17 +165,23 @@ namespace Client
                     }
 
                     byte[] output;
+                    this.statusListBox.Items.Remove("Downloading " + file);
+                    this.statusListBox.Items.Add("Decrypthing " + file);
                     block.decrypth(input, out output);
+                    this.statusListBox.Items.Remove("Decrypthing " + file);
 
+                    this.statusListBox.Items.Add("Checking hash " + file);
                     byte[] hashFile = CryptoLibrary.TigerHash.TigerHashAlgo(output);
                     byte[] originalHash = proxy.getFileHash(username, password, file);
                     
+                    this.statusListBox.Items.Remove("Checking hash " + file);
                     if (!originalHash.SequenceEqual(hashFile))
                     {
                         MessageBox.Show("Error decoding file!");
                         return;
                     }
 
+                    this.statusListBox.Items.Add(" Saving file " + file);
                     using (FileStream stream = new FileStream(saveFile, FileMode.Create))
                     {
                         using (BinaryWriter sw = new BinaryWriter(stream))
@@ -178,6 +189,7 @@ namespace Client
                             sw.Write(output);
                         }
                     }
+                    this.statusListBox.Items.Remove(" Saving file " + file);
 
                 }
                 catch (CryptoLibrary.CryptoAlgoErrors err)
