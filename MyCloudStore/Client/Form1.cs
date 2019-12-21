@@ -34,9 +34,9 @@ namespace Client
         {
             this.Controls.Clear();
 
-            login = new Login();
+            login = new Login(proxy);
             this.Width = 240;
-            this.Height = 180;
+            this.Height = 200;
             login.Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top  | AnchorStyles.Right;
             login.login = this.loginEvent;
             this.Controls.Add(login);
@@ -60,8 +60,6 @@ namespace Client
             catch(FaultException<ErrorMessages> e)
             {
                 MessageBox.Show(e.Detail.Message);
-                proxy.RegisterUser(username, hashPassword);
-                this.loginFun(username, password);
             }
         }
     }

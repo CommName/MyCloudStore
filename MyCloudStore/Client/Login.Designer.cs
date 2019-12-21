@@ -34,6 +34,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.herderLabel = new System.Windows.Forms.Label();
             this.Login_button = new System.Windows.Forms.Button();
+            this.registerButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // password_text_box
@@ -100,7 +101,7 @@
             // 
             this.Login_button.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Login_button.Location = new System.Drawing.Point(7, 95);
+            this.Login_button.Location = new System.Drawing.Point(7, 101);
             this.Login_button.Name = "Login_button";
             this.Login_button.Size = new System.Drawing.Size(212, 24);
             this.Login_button.TabIndex = 5;
@@ -108,10 +109,21 @@
             this.Login_button.UseVisualStyleBackColor = true;
             this.Login_button.Click += new System.EventHandler(this.Login_button_Click);
             // 
+            // registerButton
+            // 
+            this.registerButton.Location = new System.Drawing.Point(7, 131);
+            this.registerButton.Name = "registerButton";
+            this.registerButton.Size = new System.Drawing.Size(212, 24);
+            this.registerButton.TabIndex = 6;
+            this.registerButton.Text = "Register";
+            this.registerButton.UseVisualStyleBackColor = true;
+            this.registerButton.Click += new System.EventHandler(this.registerButton_Click);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.registerButton);
             this.Controls.Add(this.password_text_box);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Login_button);
@@ -119,7 +131,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.herderLabel);
             this.Name = "Login";
-            this.Size = new System.Drawing.Size(235, 125);
+            this.Size = new System.Drawing.Size(235, 162);
             this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -134,5 +146,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label herderLabel;
         private System.Windows.Forms.Button Login_button;
+        private System.Windows.Forms.Button registerButton;
     }
 }

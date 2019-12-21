@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using System.ServiceModel;
 
 /// <summary>
 /// Summary description for UserContainer
@@ -36,6 +37,11 @@ public class UserContainer
     {
         using (var db = new UserDBContext())
         {
+            User ret = db.Users.Where(b => b.Username == username).Include(b => b.Files).FirstOrDefault();
+            if (ret != null)
+            {
+                throw new FaultException<ErrorMessages>(new ErrorMessages("User already exists!"));
+            }
             User newUser = new User();
             newUser.Username = username;
             newUser.Password = password;
