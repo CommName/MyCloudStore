@@ -109,10 +109,10 @@ namespace Client
                     byte[] output;
                     Thread uploadfileThread = new Thread(() =>
                     {
-                        this.statusListBox.Items.Add("Encrypting " + this.OFD.FileName);
+                        SetText("Encrypting " + this.OFD.FileName);
                         block.encrypth(input, out output);
-                        this.statusListBox.Items.Remove("Encrypting " + this.OFD.FileName);
-                        this.statusListBox.Items.Add("Uploading " + this.OFD.FileName);
+                        RemvoeText("Encrypting " + this.OFD.FileName);
+                        SetText("Uploading " + this.OFD.FileName);
                         this.proxy.createNewFile(this.username, this.password, this.OFD.SafeFileName, hash);
                         uint chunkSize = this.proxy.getChunkSize();
 
@@ -126,7 +126,7 @@ namespace Client
                             }
                             this.proxy.uploadData(username, password, this.OFD.SafeFileName, send);
                         }
-                        this.statusListBox.Items.Remove("Uploading " + this.OFD.FileName);
+                        RemvoeText("Uploading " + this.OFD.FileName);
                         this.updateFileList();
                     });
 
@@ -143,7 +143,34 @@ namespace Client
             }
 
         }
+        delegate void SetTextCallback(string text);
+        private void SetText(string text)
+        {
+            if (this.statusListBox.InvokeRequired)
+            {
+                SetTextCallback D = new SetTextCallback(SetText);
+                this.Invoke(D, new object[] { text });
 
+            }
+            else
+            {
+                    this.statusListBox.Items.Add(text);
+            }
+        }
+        delegate void RemoveTextCallBack(string text);
+        private void RemvoeText(string text)
+        {
+            if (this.statusListBox.InvokeRequired)
+            {
+                RemoveTextCallBack D = new RemoveTextCallBack(RemvoeText);
+                this.Invoke(D, new object[] { text });
+
+            }
+            else
+            {
+                this.statusListBox.Items.Remove(text);
+            }
+        }
         private void download_button_Click(object sender, EventArgs e)
         {
             if (this.SFD.ShowDialog() == DialogResult.OK)
@@ -157,7 +184,7 @@ namespace Client
                     CryptoLibrary.CryptoAlgo block = this.cryptoFactory.getCryptoAlgo();
                     byte[] input = new byte[0];
                     //Skidanje sa servera
-                    this.statusListBox.Items.Add("Downloading " + file);
+                    SetText("Downloading " + file);
                     bool done = false;
                     uint offset = 0;
                     uint chunksize = proxy.getChunkSize();
@@ -174,23 +201,23 @@ namespace Client
                     }
 
                     byte[] output;
-                    this.statusListBox.Items.Remove("Downloading " + file);
-                    this.statusListBox.Items.Add("Decrypthing " + file);
+                    RemvoeText("Downloading " + file);
+                    SetText("Decrypthing " + file);
                     block.decrypth(input, out output);
-                    this.statusListBox.Items.Remove("Decrypthing " + file);
+                    RemvoeText("Decrypthing " + file);
 
-                    this.statusListBox.Items.Add("Checking hash " + file);
+                    SetText("Checking hash " + file);
                     byte[] hashFile = CryptoLibrary.TigerHash.TigerHashAlgo(output);
                     byte[] originalHash = proxy.getFileHash(username, password, file);
                     
-                    this.statusListBox.Items.Remove("Checking hash " + file);
+                    RemvoeText("Checking hash " + file);
                     if (!originalHash.SequenceEqual(hashFile))
                     {
                         MessageBox.Show("Error decoding file!");
                         return;
                     }
 
-                    this.statusListBox.Items.Add(" Saving file " + file);
+                    SetText(" Saving file " + file);
                     using (FileStream stream = new FileStream(saveFile, FileMode.Create))
                     {
                         using (BinaryWriter sw = new BinaryWriter(stream))
@@ -198,7 +225,7 @@ namespace Client
                             sw.Write(output);
                         }
                     }
-                    this.statusListBox.Items.Remove(" Saving file " + file);
+                    RemvoeText(" Saving file " + file);
 
                 }
                 catch (CryptoLibrary.CryptoAlgoErrors err)
