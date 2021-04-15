@@ -1,4 +1,4 @@
-# Abaout
+# About
 
 This is a student project that implements some of basic cryptographic algorithms. This projects consists of 3 smaller projects:
     - Client - uses cryptolibrary to encode and decode files before sending them to service for permanent storage. 
